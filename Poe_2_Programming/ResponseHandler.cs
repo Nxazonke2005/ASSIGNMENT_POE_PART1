@@ -1,30 +1,72 @@
-﻿namespace CyberSecurityAwarenessBot
+﻿using System;
+
+namespace CyberSecurityAwarenessBot
 {
     public class ResponseHandler
     {
+        static Random random = new Random();
+
+        static string[] phishingResponses =
+        {
+            "Be careful of emails asking for personal information. Scammers often disguise themselves as trusted organisations.",
+            "Never click suspicious links in emails or messages.",
+            "Always verify the sender before sharing personal details online."
+        };
+
+        static string[] passwordResponses =
+        {
+            "Use strong passwords with symbols, numbers and uppercase letters.",
+            "Never use your name or birthdate in your password.",
+            "Use a different password for every account."
+        };
+
+        static string[] malwareResponses =
+        {
+            "Install antivirus software to protect against malware.",
+            "Do not download files from unknown websites.",
+            "Keep your software updated to avoid malware attacks."
+        };
+
+        static string[] safeBrowsingResponses =
+        {
+            "Only visit trusted websites.",
+            "Avoid downloading suspicious files online.",
+            "Always check if a website uses HTTPS."
+        };
+
         public static string GetPhishingResponse()
         {
-            return "Phishing is a cyberattack where criminals pretend to be trusted organizations to steal personal information such as passwords, bank details and usernames.";
-        }
-
-        public static string GetMalwareResponse()
-        {
-            return "Malware is malicious software designed to damage computers, steal information or gain unauthorized access to systems. Examples include viruses, trojans and ransomware.";
+            return phishingResponses[random.Next(phishingResponses.Length)];
         }
 
         public static string GetPasswordResponse()
         {
-            return "Strong passwords should contain uppercase letters, lowercase letters, numbers and symbols. Never share your password with anyone.";
+            return passwordResponses[random.Next(passwordResponses.Length)];
+        }
+
+        public static string GetMalwareResponse()
+        {
+            return malwareResponses[random.Next(malwareResponses.Length)];
         }
 
         public static string GetSafeBrowsingResponse()
         {
-            return "Safe browsing means avoiding suspicious websites, downloading files only from trusted sources and keeping your browser updated.";
+            return safeBrowsingResponses[random.Next(safeBrowsingResponses.Length)];
         }
 
         public static string GetPurposeResponse()
         {
             return "My purpose is to educate users about cybersecurity awareness and help people stay safe online.";
+        }
+
+        public static string GetMorePhishingInfo()
+        {
+            return "Phishing attacks usually trick users into revealing passwords, banking details or personal information through fake emails and websites.";
+        }
+
+        public static string GetMorePasswordInfo()
+        {
+            return "Strong passwords reduce the chances of hackers accessing your accounts.";
         }
     }
 }
