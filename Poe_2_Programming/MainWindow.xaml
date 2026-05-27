@@ -37,16 +37,6 @@
                            Margin="0,0,0,10"/>
 
                 <!-- SMALLER ASCII IMAGE -->
-                <Image Source="/the_iop-lock-8704819_1920 (1).jpg" Stretch="UniformToFill" Height="81" Width="144" StretchDirection="DownOnly" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0.831"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
                 <!-- SECURITY MESSAGE -->
                 <Border BorderBrush="#45D6FF"
                         BorderThickness="1"
@@ -72,7 +62,16 @@
                     </StackPanel>
 
                 </Border>
-
+                <Image Source="/the_iop-lock-8704819_1920.jpg" Height="80" Width="378" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.474"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
             </StackPanel>
 
         </Border>
