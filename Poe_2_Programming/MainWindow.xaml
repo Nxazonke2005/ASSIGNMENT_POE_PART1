@@ -1,0 +1,184 @@
+﻿<Window x:Class="CyberSecurityAwarenessBot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cybersecurity Awareness Bot"
+        Height="700"
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2F">
+
+    <Grid Margin="15">
+
+        <!-- ROW DEFINITIONS -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================= HEADER ================= -->
+        <Border Grid.Row="0"
+                Background="#25253A"
+                CornerRadius="15"
+                BorderBrush="#3A3A55"
+                BorderThickness="2"
+                Padding="10"
+                Margin="0,0,0,10">
+
+            <StackPanel>
+
+                <!-- TITLE -->
+                <TextBlock Text="CYBERSECURITY AWARENESS BOT"
+                           Foreground="#45D6FF"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"/>
+
+                <!-- SMALLER ASCII IMAGE -->
+                <Image Source="/the_iop-lock-8704819_1920 (1).jpg" Stretch="UniformToFill" Height="81" Width="144" StretchDirection="DownOnly" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.831"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <!-- SECURITY MESSAGE -->
+                <Border BorderBrush="#45D6FF"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Padding="6"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center">
+
+                    <StackPanel>
+
+                        <TextBlock Text="USE STRONG PASSWORDS"
+                                   Foreground="White"
+                                   FontWeight="Bold"
+                                   FontSize="14"
+                                   HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="ENABLE TWO-FACTOR AUTHENTICATION"
+                                   Foreground="White"
+                                   FontWeight="Bold"
+                                   FontSize="14"
+                                   HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+        </Border>
+
+        <!-- ================= CHAT AREA ================= -->
+        <Border Grid.Row="1"
+                Background="#25253A"
+                CornerRadius="15"
+                BorderBrush="#3A3A55"
+                BorderThickness="2"
+                Padding="10"
+                Margin="0,0,0,10">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                <StackPanel Name="ChatPanel">
+
+                    <!-- BOT MESSAGE -->
+                    <Border Background="#2D4F6C"
+                            CornerRadius="10"
+                            Padding="10"
+                            Margin="0,0,0,10">
+
+                        <TextBlock Text="BOT: Hello! What is your name?"
+                                   Foreground="#45D6FF"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                    </Border>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Border>
+
+        <!-- ================= INPUT AREA ================= -->
+        <Border Grid.Row="2"
+                Background="#25253A"
+                CornerRadius="15"
+                BorderBrush="#3A3A55"
+                BorderThickness="2"
+                Padding="10"
+                Margin="0,0,0,10">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- MESSAGE BOX -->
+                <TextBox Name="txtMessage"
+                         Grid.Column="0"
+                         Height="42"
+                         FontSize="15"
+                         Background="#1E1E2F"
+                         Foreground="White"
+                         BorderBrush="#45D6FF"
+                         BorderThickness="2"
+                         VerticalContentAlignment="Center"
+                         Padding="10"/>
+
+                <!-- SEND BUTTON -->
+                <Button Name="btnSend"
+                        Grid.Column="1"
+                        Content="SEND MESSAGE"
+                        Margin="15,0,0,0"
+                        Height="42"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Background="#00E676"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Click="btnSend_Click"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- ================= FOOTER ================= -->
+        <Border Grid.Row="3"
+                Background="#25253A"
+                CornerRadius="10"
+                BorderBrush="#3A3A55"
+                BorderThickness="1">
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                <Ellipse Width="10"
+                         Height="10"
+                         Fill="#00E676"
+                         Margin="10,0,10,0"/>
+
+                <TextBlock Text="System Ready - Online | Cybersecurity Awareness Bot v2.0"
+                           Foreground="White"
+                           FontSize="13"
+                           VerticalAlignment="Center"/>
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+
+</Window>

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="the_iop-lock-8704819_1920 %281%29.jpg" />
+    <None Remove="WhatsApp Image 2026-05-26 at 15.01.12.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="the_iop-lock-8704819_1920 (1).jpg" />
+    <Resource Include="WhatsApp Image 2026-05-26 at 15.01.12.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Greeting.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
