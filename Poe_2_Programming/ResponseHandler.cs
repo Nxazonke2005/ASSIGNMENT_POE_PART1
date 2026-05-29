@@ -4,89 +4,38 @@ namespace CyberSecurityAwarenessBot
 {
     public class ResponseHandler
     {
-        // Creates a random object for random responses
         static Random random = new Random();
 
-        // Stores phishing responses
+        // Phishing responses — all different
         static string[] phishingResponses =
         {
-            "Be careful of emails asking for personal information.",
-            "Never click suspicious links in emails or messages.",
-            "Always verify the sender before sharing personal details online.",
-            "Scammers create fake websites to steal passwords.",
-            "Do not open attachments from unknown senders."
+            "Phishing emails often have spelling mistakes and generic greetings like 'Dear Customer'.",
+            "Never enter your password after clicking a link in an email — go directly to the website instead.",
+            "Scammers use fake login pages that look identical to real ones. Always check the URL bar.",
+            "If you receive a suspicious email, forward it to report@phishing.gov (in the US) or your country's anti-phishing center.",
+            "OTP (one-time password) codes should NEVER be shared — not even with 'bank employees' who call you."
         };
 
-        // Stores password responses
         static string[] passwordResponses =
         {
-            "Use strong passwords with symbols, numbers and uppercase letters.",
-            "Never use your name or birthdate in your password.",
-            "Use a different password for every account.",
-            "Enable two-factor authentication for extra security.",
-            "Avoid short passwords because they are easy to hack."
+            "Use a passphrase: 4 random words like 'Horse-Battery-Staple-Correct' — long and easy to remember.",
+            "Change your password immediately if a website you use announces a data breach.",
+            "Avoid using your pet's name, birth year, or favorite sports team — hackers check social media for those.",
+            "Most hacked passwords: 123456, password, qwerty, admin. Don't use these!",
+            "Enable 2FA everywhere — especially email and banking."
         };
 
-        // Stores malware responses
         static string[] malwareResponses =
         {
-            "Install antivirus software to protect against malware.",
-            "Do not download files from unknown websites.",
-            "Keep your software updated to avoid malware attacks.",
-            "Scan USB devices before opening files.",
-            "Avoid clicking pop-up advertisements."
+            "Malware can arrive via email attachments named 'Invoice.pdf.exe' — always show file extensions.",
+            "Ransomware gangs often target businesses, but individuals get hit too. Back up your files offline.",
+            "Fake 'Your PC is infected' pop-ups are scams — don't call the number or download their 'fix'.",
+            "Keep your browser updated — many malware attacks exploit old browser vulnerabilities.",
+            "Use ad-blockers to avoid malicious ads that install malware without clicking (drive-by downloads)."
         };
 
-        // Stores safe browsing responses
-        static string[] safeBrowsingResponses =
-        {
-            "Only visit trusted websites.",
-            "Avoid downloading suspicious files online.",
-            "Always check if a website uses HTTPS.",
-            "Never save passwords on public computers.",
-            "Log out after using shared devices."
-        };
-
-        // Returns a random phishing response
-        public static string GetPhishingResponse()
-        {
-            return phishingResponses[random.Next(phishingResponses.Length)];
-        }
-
-        // Returns a random password response
-        public static string GetPasswordResponse()
-        {
-            return passwordResponses[random.Next(passwordResponses.Length)];
-        }
-
-        // Returns a random malware response
-        public static string GetMalwareResponse()
-        {
-            return malwareResponses[random.Next(malwareResponses.Length)];
-        }
-
-        // Returns a random safe browsing response
-        public static string GetSafeBrowsingResponse()
-        {
-            return safeBrowsingResponses[random.Next(safeBrowsingResponses.Length)];
-        }
-
-        // Explains the chatbot purpose
-        public static string GetPurposeResponse()
-        {
-            return "My purpose is to educate users about cybersecurity awareness and online safety.";
-        }
-
-        // Gives detailed phishing information
-        public static string GetMorePhishingInfo()
-        {
-            return "Phishing attacks trick users into revealing passwords or banking information using fake emails and websites.";
-        }
-
-        // Gives detailed password information
-        public static string GetMorePasswordInfo()
-        {
-            return "Strong passwords should contain uppercase letters, numbers and symbols to improve security.";
-        }
+        public static string GetPhishingResponse() => phishingResponses[random.Next(phishingResponses.Length)];
+        public static string GetPasswordResponse() => passwordResponses[random.Next(passwordResponses.Length)];
+        public static string GetMalwareResponse() => malwareResponses[random.Next(malwareResponses.Length)];
     }
 }
