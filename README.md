@@ -203,3 +203,67 @@ Pretend to be trusted companies or people
 Send fake emails or messages
 Trick users into clicking harmful links
 Steal passwords or personal data
+
+Part 2
+Cybersecurity Awareness Chatbot (C# WPF Application)
+Overview
+This project is a desktop-based cybersecurity awareness chatbot built with C# and Windows Presentation Foundation (WPF). Unlike a console application, this program features a modern graphical user interface with chat bubbles, a professional dark theme, audio feedback, and intelligent conversational capabilities. The chatbot educates users about online safety threats including phishing, passwords, malware, and safe browsing practices through interactive dialogue. The program interacts with the user, personalizes the experience by remembering conversation context, detects emotional sentiment, and explains important cybersecurity concepts in an engaging way.
+
+Purpose of the Project
+This project was built to help learners understand C# and WPF desktop application development, practice event-driven programming and UI design, implement conversation flow and context tracking, detect user sentiment and provide tailored responses, create an educational tool for cybersecurity awareness, and integrate multimedia elements like sound and images.
+
+Project Structure
+The project contains several classes that work together. The MainWindow.xaml file defines the user interface layout using XAML markup language. The MainWindow.xaml.cs file contains the code-behind that controls window behavior and event handlers. The Chatbot.cs file holds the core conversation logic and response generation. The ResponseHandler.cs file provides random responses for general questions. The UIHelper.cs file creates styled chat bubbles for both bot and user messages. The User.cs file stores user information such as name and interests. The AudioPlayer.cs file plays a greeting sound when the application starts. The project also includes an Ano.wav audio file and a lock image for visual decoration.
+
+How the Program Works Step-by-Step
+Step 1: Application Starts - The program begins by displaying the main window defined in MainWindow.xaml. The window is set to 700 pixels high and 1000 pixels wide with a dark purple background color. The header shows the title "CYBERSECURITY AWARENESS BOT" in bright blue text along with security reminders about strong passwords and two-factor authentication. A lock image appears for visual appeal. Below the header is the chat display area which is a scrollable panel where all conversation messages appear. Below that is the input area containing a text box for typing messages and a green send button. A footer at the bottom shows a green status indicator and text saying the system is ready and online.
+
+Step 2: Welcome Message and Audio Greeting - When the window loads, the AudioPlayer class calls its PlayGreeting method which attempts to load and play the Ano.wav sound file using a SoundPlayer object. The method uses a try-catch block so if the sound file is missing, the program continues running without crashing. Simultaneously, the bot automatically sends a welcome message asking for the user's name. This message appears in the chat area inside a styled border created by the UIHelper class. The chat area uses a ScrollViewer so users can scroll through long conversations.
+
+Step 3: User Enters Their Name - The user types their name in the text box and clicks the "SEND MESSAGE" button or presses the Enter key. The btnSend_Click event handler in MainWindow.xaml.cs captures this input. The program reads the text from the txtMessage box and passes it to the Chatbot class for processing. The input is also displayed in the chat area using UIHelper.CreateUserMessage which creates a dark gray bubble with black text prefixed by "YOU:".
+
+Step 4: Input Validation and Processing - The Chatbot.cs class receives the user input through its GetResponse method. The method first converts the input to lowercase using ToLower() and removes extra spaces with Trim() for easier keyword matching. It then detects user sentiment by checking for emotional keywords. If the input contains words like "curious", "interest", or "want to learn", the sentiment is set to "curious". If it contains "worried", "scared", "concerned", "nervous", or "afraid", the sentiment is set to "worried". Otherwise it defaults to "neutral". This sentiment detection allows the bot to adjust its tone and response style appropriately.
+
+Step 5: Topic Detection - After sentiment detection, the method checks for cybersecurity topics in a specific order, checking topics BEFORE greetings so that the word "phishing" is not mistaken for a greeting. If the input contains "phishing", "scam", "fake email", or "fake website", the current topic is set to "phishing" and tracking variables like followUpCount and tipCount are reset to zero. Similarly, if the input contains "password", "pin", "login", or "account", the topic becomes "password". For "malware", "virus", "trojan", "worm", or "ransomware", the topic becomes "malware". For "safe browsing", "internet safety", "online safety", or "privacy", the topic becomes "safebrowsing". Once the topic is identified, the corresponding response method is called.
+
+Step 6: Response Generation Based on Topic and Sentiment - Each topic has its own response method. For example, GetPhishingResponse checks if the user asked for an explanation using phrases like "tell me about", "what is", or "explain". If so, it checks the detected sentiment. For a curious user, it returns an enthusiastic educational response. For a worried user, it returns a reassuring response with protection advice. For neutral sentiment, it returns a factual definition. If the user asked for an example, it returns a real-world scenario like a fake bank email. If the user simply typed the topic name alone without any qualifiers, it returns a helpful intro response asking if they want more information, an example, or tips.
+
+Step 7: Follow-up Question Handling - The bot remembers the current topic and supports follow-up questions through the followUpCount and tipCount variables. If the user types "tell me more", "more information", or "elaborate", the method first checks if a topic has been selected. If not, it asks the user to choose a topic first. If a topic exists, it increments followUpCount and calls GetMoreInfo. This method provides progressively deeper information. For the first "tell me more" on phishing, it explains that over 80 percent of cyberattacks start with phishing and advises hovering over links. For the second request, it explains spear phishing, vishing, and smishing. For the third request, it explains advanced fake login pages. The same three-level depth applies to passwords and malware topics.
+
+Step 8: Tips and Examples - If the user types "another tip", "give me a tip", or "more tips", the method checks for an existing topic, increments tipCount, and calls GetAnotherTip. This method uses arrays of four different tips for each topic and returns tips[tipCount % tips.Length] which cycles through the tips in order. This ensures the user gets a different tip each time. For passwords, tips include never reusing passwords, changing passwords after data breaches, avoiding pet names and birthdays, and understanding password cracking times. For phishing, tips include checking for urgency in emails, forwarding suspicious emails, checking email headers, and enabling multi-factor authentication. If the user types "example", "examples", or "show me an example", the method calls GetExample which returns a real-world scenario for the current topic.
+
+Step 9: Random Responses for General Questions - The ResponseHandler class provides random responses for general questions without specific context. It contains a static Random object and arrays of string responses. The phishingResponses array contains five different facts about phishing scams. The passwordResponses array contains five different password security tips. The malwareResponses array contains five different facts about malware protection. The class provides three public methods: GetPhishingResponse, GetPasswordResponse, and GetMalwareResponse. Each method randomly selects and returns one response from its corresponding array using random.Next(array.Length). This ensures the bot provides varied answers rather than repeating the same information every time.
+
+Step 10: Message Display with UIHelper - The UIHelper.cs class is responsible for creating the visual chat bubbles. The CreateBotMessage method creates a Border object with dark slate blue background, rounded corners of 10 pixels, inner padding of 10 pixels, and outer margins of 5 pixels. It creates a TextBlock inside the border with white text prefixed by "BOT:" followed by the message. Text wrapping is enabled so long messages break into multiple lines. The CreateUserMessage method follows the same pattern but uses a dark gray background instead of blue and black text instead of white, with the label "YOU:". Both methods return the complete Border object which is then added to the ChatPanel StackPanel in the main window.
+
+Step 11: Help and Exit Commands - The chatbot also handles help and exit commands. If the user types "help" or "what can I ask", the GetHelpMessage method returns a formatted list of all available commands. If the user types "bye", "goodbye", "exit", or "quit", the bot returns a farewell message reminding them to stay safe online and think before clicking.
+
+Step 12: Default Response - If the user input does not match any topic, follow-up command, greeting, help request, or exit command, the GetResponse method returns a default response suggesting cybersecurity topics the user can ask about including phishing, passwords, malware, or safe browsing. This ensures the bot always responds to the user with something helpful rather than saying "I don't understand."
+
+OOP Concepts Used
+Classes are used throughout including Chatbot for conversation logic, ResponseHandler for random responses, UIHelper for chat bubbles, User for data storage, AudioPlayer for sound, and MainWindow for UI management. Objects are created using the new keyword such as private Chatbot chatbot = new Chatbot(). Encapsulation is achieved because each class has a specific responsibility. Static methods and properties are used such as CreateBotMessage, CreateUserMessage, and GetPhishingResponse. Event-driven programming is demonstrated through btnSend_Click and KeyDown event handlers.
+
+Example Conversation Flow
+User: Hello
+BOT: Hello. I can help you learn about passwords, phishing, malware, and online safety. What would you like to know?
+
+User: phishing
+BOT: Phishing is when scammers send fake messages to steal your passwords or personal information. Would you like me to tell you more, show an example, or give you tips to avoid it?
+
+User: tell me more
+BOT: More on phishing: Over 80 percent of cyberattacks start with phishing. Always hover over links before clicking to see the real URL. If suspicious, type the website address manually in your browser.
+
+User: another tip
+BOT: Phishing tip: If an email creates urgency like 'Your account will close today', that is a red flag. Pause and verify by calling the company directly.
+
+User: example
+BOT: Real phishing example: An email that says 'Your Netflix payment failed. Update now' - the link goes to a fake Netflix site that steals your credit card.
+
+User: I'm worried about malware
+BOT: It's smart to be concerned, but you can stay safe. Install antivirus software like Windows Defender or Malwarebytes, keep software updated, and never download from untrusted sites.
+
+User: bye
+BOT: Goodbye. Stay safe online. Remember: Think before you click.
+
+Technologies Used
+C# as core programming language, WPF for desktop UI framework, XAML for interface markup, System.Media for audio playback, and .NET Framework for runtime environment.
