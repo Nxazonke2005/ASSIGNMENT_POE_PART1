@@ -8,7 +8,7 @@ namespace CyberSecurityAwarenessBot
         {
             try
             {
-                SoundPlayer player = new SoundPlayer("Greeting.wav");
+                SoundPlayer player = new SoundPlayer("Ano.wav");
 
                 player.Play();
             }

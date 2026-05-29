@@ -2,137 +2,217 @@
 {
     public class Chatbot
     {
+        // Stores the current topic
         private string currentTopic = "";
 
+        // Creates user object
         private User user = new User();
 
+        // Main chatbot response method
         public string GetResponse(string input)
         {
+            // Convert input to lowercase
             input = input.ToLower();
 
-            // Greetings
-            if (input.Contains("hello") || input.Contains("hi"))
+            // ---------------- GREETINGS ----------------
+            if (input.Contains("hello") ||
+                input.Contains("hi") ||
+                input.Contains("hey"))
             {
-                return "Hello. How can I help you today?";
+                return "Hello. I can help you learn about passwords, phishing, malware and online safety.";
             }
 
-            // Sentiment Detection
-            if (input.Contains("worried"))
-            {
-                currentTopic = "scams";
-
-                return "It is completely understandable to feel that way. Scammers can be very convincing. Here is a tip: Never share banking details with unknown people online.";
-            }
-
-            if (input.Contains("confused"))
-            {
-                return "Do not worry. I will explain it more simply for you.";
-            }
-
-            // Memory Feature
-            if (input.Contains("interested in privacy"))
-            {
-                user.Interest = "privacy";
-
-                return "Great. I will remember that you are interested in privacy. It is a very important part of staying safe online.";
-            }
-
-            // Recall memory
-            if (input.Contains("privacy"))
-            {
-                return "As someone interested in privacy, you should review your account security settings regularly.";
-            }
-
-            // Phishing
-            if (input.Contains("phishing"))
-            {
-                currentTopic = "phishing";
-
-                return ResponseHandler.GetPhishingResponse();
-            }
-
-            // Malware
-            else if (input.Contains("malware"))
-            {
-                currentTopic = "malware";
-
-                return ResponseHandler.GetMalwareResponse();
-            }
-
-            // Passwords
-            else if (input.Contains("password"))
+            // ---------------- PASSWORD QUESTIONS ----------------
+            else if (input.Contains("password") ||
+                     input.Contains("pin") ||
+                     input.Contains("login") ||
+                     input.Contains("account"))
             {
                 currentTopic = "password";
 
-                return ResponseHandler.GetPasswordResponse();
+                // Password examples and explanations
+                if (input.Contains("strong"))
+                {
+                    return "A strong password should contain uppercase letters, lowercase letters, numbers and symbols. Example: P@ssWord2026!";
+                }
+
+                else if (input.Contains("weak"))
+                {
+                    return "A weak password is easy to guess. Example: 123456 or john2000.";
+                }
+
+                else if (input.Contains("example"))
+                {
+                    return "Example of a strong password: T!ger#2026Secure";
+                }
+
+                else if (input.Contains("hack"))
+                {
+                    return "Hackers can steal weak passwords using guessing tools or fake websites.";
+                }
+
+                else
+                {
+                    return ResponseHandler.GetPasswordResponse();
+                }
             }
 
-            // Safe Browsing
-            else if (input.Contains("safe browsing"))
+            // ---------------- PHISHING QUESTIONS ----------------
+            else if (input.Contains("phishing") ||
+                     input.Contains("scam") ||
+                     input.Contains("fake email") ||
+                     input.Contains("fake website") ||
+                     input.Contains("otp"))
+            {
+                currentTopic = "phishing";
+
+                if (input.Contains("example"))
+                {
+                    return "Example of phishing: A fake bank email asking you to click a link and enter your password.";
+                }
+
+                else if (input.Contains("avoid"))
+                {
+                    return "To avoid phishing, never click suspicious links and always verify the sender.";
+                }
+
+                else if (input.Contains("email"))
+                {
+                    return "Phishing emails often contain urgent messages like 'Your account will be locked.'";
+                }
+
+                else
+                {
+                    return ResponseHandler.GetPhishingResponse();
+                }
+            }
+
+            // ---------------- MALWARE QUESTIONS ----------------
+            else if (input.Contains("malware") ||
+                     input.Contains("virus") ||
+                     input.Contains("trojan") ||
+                     input.Contains("worm"))
+            {
+                currentTopic = "malware";
+
+                if (input.Contains("example"))
+                {
+                    return "Example of malware: A virus hidden inside a fake game download.";
+                }
+
+                else if (input.Contains("protect"))
+                {
+                    return "You can protect your computer by installing antivirus software and avoiding suspicious downloads.";
+                }
+
+                else if (input.Contains("spread"))
+                {
+                    return "Malware spreads through infected downloads, USB devices and dangerous websites.";
+                }
+
+                else
+                {
+                    return ResponseHandler.GetMalwareResponse();
+                }
+            }
+
+            // ---------------- SAFE BROWSING ----------------
+            else if (input.Contains("safe browsing") ||
+                     input.Contains("internet safety") ||
+                     input.Contains("browser") ||
+                     input.Contains("online safety"))
             {
                 currentTopic = "safe browsing";
 
                 return ResponseHandler.GetSafeBrowsingResponse();
             }
 
-            // Purpose
-            else if (input.Contains("purpose"))
+            // ---------------- ASKING FOR TIPS ----------------
+            else if (input.Contains("tip") ||
+                     input.Contains("tips") ||
+                     input.Contains("advice") ||
+                     input.Contains("help"))
             {
-                return ResponseHandler.GetPurposeResponse();
-            }
-
-            // Follow-up Questions
-            else if (input.Contains("tell me more") || input.Contains("explain more"))
-            {
-                if (currentTopic == "phishing")
+                if (currentTopic == "password")
                 {
-                    return ResponseHandler.GetMorePhishingInfo();
+                    return "Password tip: Use different passwords for every account and enable two-factor authentication.";
                 }
 
-                else if (currentTopic == "password")
+                else if (currentTopic == "phishing")
                 {
-                    return ResponseHandler.GetMorePasswordInfo();
-                }
-
-                else
-                {
-                    return "Please choose a cybersecurity topic first.";
-                }
-            }
-
-            // Another Tip
-            else if (input.Contains("another tip"))
-            {
-                if (currentTopic == "phishing")
-                {
-                    return ResponseHandler.GetPhishingResponse();
-                }
-
-                else if (currentTopic == "password")
-                {
-                    return ResponseHandler.GetPasswordResponse();
+                    return "Phishing tip: Never trust emails asking for passwords or banking details.";
                 }
 
                 else if (currentTopic == "malware")
                 {
-                    return ResponseHandler.GetMalwareResponse();
+                    return "Malware tip: Keep your software updated and scan files before opening them.";
                 }
 
                 else
                 {
-                    return "Please ask about a cybersecurity topic first.";
+                    return "Cybersecurity tip: Never share passwords online and avoid suspicious websites.";
                 }
             }
 
-            // Goodbye
-            else if (input.Contains("bye"))
+            // ---------------- MORE INFORMATION ----------------
+            else if (input.Contains("tell me more") ||
+                     input.Contains("more") ||
+                     input.Contains("explain") ||
+                     input.Contains("details"))
+            {
+                if (currentTopic == "password")
+                {
+                    return "Strong passwords protect your accounts from hackers. Example: MyDog@2026!";
+                }
+
+                else if (currentTopic == "phishing")
+                {
+                    return "Phishing attacks trick users into revealing passwords or banking details using fake emails and websites.";
+                }
+
+                else if (currentTopic == "malware")
+                {
+                    return "Malware is harmful software that damages devices or steals information.";
+                }
+
+                else if (currentTopic == "safe browsing")
+                {
+                    return "Safe browsing means visiting trusted websites and protecting your private information online.";
+                }
+
+                else
+                {
+                    return "Cybersecurity helps protect computers, accounts and personal information from hackers.";
+                }
+            }
+
+            // ---------------- PRIVACY ----------------
+            else if (input.Contains("privacy"))
+            {
+                user.Interest = "privacy";
+
+                return "Privacy means protecting your personal information online. Example: Do not share passwords publicly.";
+            }
+
+            // ---------------- PURPOSE ----------------
+            else if (input.Contains("purpose") ||
+                     input.Contains("what do you do"))
+            {
+                return "My purpose is to teach users about cybersecurity awareness and online safety.";
+            }
+
+            // ---------------- GOODBYE ----------------
+            else if (input.Contains("bye") ||
+                     input.Contains("goodbye"))
             {
                 return "Goodbye. Stay safe online.";
             }
 
+            // ---------------- DEFAULT RESPONSE ----------------
+            // Bot always responds instead of saying "I don't understand"
             else
             {
-                return "I do not understand your request. Please ask about phishing, malware, passwords or safe browsing.";
+                return "Cybersecurity is important for protecting passwords, devices and personal information online. You can ask me about phishing, malware, scams, passwords or internet safety.";
             }
         }
     }

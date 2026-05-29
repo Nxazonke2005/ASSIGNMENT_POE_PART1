@@ -19,9 +19,6 @@
  
 
   <ItemGroup>
-    <None Update="Greeting.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="the_iop-lock-8704819_1920 %281%29.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
