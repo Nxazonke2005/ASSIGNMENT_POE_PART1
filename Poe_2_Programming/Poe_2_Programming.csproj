@@ -9,7 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Ano.wav" />
     <None Remove="the_iop-lock-8704819_1920.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Ano.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
