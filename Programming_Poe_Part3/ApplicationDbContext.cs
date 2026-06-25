@@ -7,6 +7,7 @@ namespace CyberSecurityAwarenessBot
     public class ApplicationDbContext : DbContext
     {
         public DbSet<TaskItem> Tasks { get; set; }
+        //To get the database file path, you can use the following code:
 
         public ApplicationDbContext()
         {
