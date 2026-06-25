@@ -23,6 +23,7 @@ namespace CyberSecurityAwarenessBot
             border.Child = text;
             return border;
         }
+        // Method to create a user message UI element
 
         public static Border CreateUserMessage(string message)
         {
