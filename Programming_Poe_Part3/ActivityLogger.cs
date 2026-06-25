@@ -10,6 +10,7 @@ namespace CyberSecurityAwarenessBot
         private int maxLogSize = 50;
 
         private ActivityLogger() { }
+        // Uptated the Instance property to use a private static field for the singleton instance
 
         public static ActivityLogger Instance
         {
