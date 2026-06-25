@@ -1,164 +1,108 @@
-﻿using System.Windows;
+﻿using System;
+using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Input;
 
 namespace CyberSecurityAwarenessBot
 {
     public partial class MainWindow : Window
     {
-        // Creates chatbot object
-        private Chatbot chatbot = new Chatbot();
+        // Creates chatbot instance
+        private Chatbot chatbot;
 
-        // Creates user object
-        private User currentUser = new User();
-
-        // Constructor
         public MainWindow()
         {
             InitializeComponent();
+            chatbot = new Chatbot();
 
-            // Plays greeting sound
-            AudioPlayer.PlayGreeting();
+            // Shows welcome message when application starts
+            ShowWelcomeMessage();
 
-            // Bot asks for name ONLY ONCE here
-            AddBotMessage("Hello! What is your name?");
+            // Sets focus to input box
+            UserInputTextBox.Focus();
         }
 
-        // Runs when SEND MESSAGE button is clicked
-        private void btnSend_Click(object sender, RoutedEventArgs e)
+        // Displays welcome message with available commands
+        private void ShowWelcomeMessage()
         {
-            // Gets text from textbox
-            string userInput = txtMessage.Text.Trim();
+            string welcomeMessage = "Hello! I'm your cybersecurity assistant." + Environment.NewLine + Environment.NewLine +
+                                   "You can ask me about:" + Environment.NewLine +
+                                   "- Passwords (strong passwords, examples, tips)" + Environment.NewLine +
+                                   "- Phishing (scams, fake emails, protection)" + Environment.NewLine +
+                                   "- Malware (viruses, trojans, protection)" + Environment.NewLine +
+                                   "- Online safety (safe browsing, privacy)" + Environment.NewLine + Environment.NewLine +
+                                   "Try asking:" + Environment.NewLine +
+                                   "- 'Tell me about phishing'" + Environment.NewLine +
+                                   "- 'I'm worried about malware'" + Environment.NewLine +
+                                   "- 'Give me a password tip'" + Environment.NewLine +
+                                   "- 'Tell me more' (after any topic)";
 
-            // Prevent empty messages
-            if (string.IsNullOrWhiteSpace(userInput))
+            AddBotMessage(welcomeMessage);
+        }
+
+        // Handles send button click event
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendUserMessage();
+        }
+
+        // Handles Enter key press in text box
+        private void UserInputTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                return;
+                SendUserMessage();
+                e.Handled = true;
             }
+        }
 
-            // Shows user message
+        // Processes user input and gets bot response
+        private void SendUserMessage()
+        {
+            string userInput = UserInputTextBox.Text.Trim();
+
+            // Prevents sending empty messages
+            if (string.IsNullOrWhiteSpace(userInput))
+                return;
+
+            // Adds user message to chat display
             AddUserMessage(userInput);
 
-            // ------------------------------------------------
-            // ASK FOR NAME ONLY ONCE
-            // ------------------------------------------------
-            // If name is empty, save first message as username
-            if (string.IsNullOrWhiteSpace(currentUser.Name))
-            {
-                // Save name
-                currentUser.Name = userInput;
+            // Clears input box for next message
+            UserInputTextBox.Clear();
 
-                // Welcome user
-                AddBotMessage("Welcome " + currentUser.Name + ".");
+            // Gets response from chatbot logic
+            string botResponse = chatbot.GetResponse(userInput);
 
-                // Explain chatbot purpose
-                AddBotMessage(
-                    "You can ask me anything about passwords, phishing, malware, scams or online safety."
-                );
+            // Adds bot response to chat display
+            AddBotMessage(botResponse);
 
-                // Clear textbox
-                txtMessage.Clear();
+            // Scrolls to show latest messages
+            ScrollToBottom();
 
-                // STOP method here
-                return;
-            }
-
-            // ------------------------------------------------
-            // NORMAL CHATBOT RESPONSES
-            // ------------------------------------------------
-
-            // Gets chatbot response
-            string response = chatbot.GetResponse(userInput);
-
-            // Displays bot response
-            AddBotMessage(response);
-
-            // Clears textbox
-            txtMessage.Clear();
+            // Returns focus to input box for next message
+            UserInputTextBox.Focus();
         }
 
-        // ------------------------------------------------
-        // BOT MESSAGE DESIGN
-        // ------------------------------------------------
-        private void AddBotMessage(string message)
-        {
-            // Creates border
-            Border border = new Border();
-
-            // Background color
-            border.Background = new SolidColorBrush(Color.FromRgb(44, 62, 80));
-
-            // Rounded corners
-            border.CornerRadius = new CornerRadius(10);
-
-            // Inner spacing
-            border.Padding = new Thickness(10);
-
-            // Outer spacing
-            border.Margin = new Thickness(5);
-
-            // Creates text
-            TextBlock text = new TextBlock();
-
-            // Adds BOT label
-            text.Text = "BOT: " + message;
-
-            // Text color
-            text.Foreground = Brushes.LightBlue;
-
-            // Text size
-            text.FontSize = 16;
-
-            // Wrap long text
-            text.TextWrapping = TextWrapping.Wrap;
-
-            // Places text inside border
-            border.Child = text;
-
-            // Adds message to panel
-            ChatPanel.Children.Add(border);
-        }
-
-        // ------------------------------------------------
-        // USER MESSAGE DESIGN
-        // ------------------------------------------------
+        // Creates and adds user message bubble
         private void AddUserMessage(string message)
         {
-            // Creates border
-            Border border = new Border();
+            Border userBorder = UIHelper.CreateUserMessage(message);
+            ChatStackPanel.Children.Add(userBorder);
+        }
 
-            // Background color
-            border.Background = new SolidColorBrush(Color.FromRgb(60, 60, 60));
+        // Creates and adds bot message bubble
+        private void AddBotMessage(string message)
+        {
+            Border botBorder = UIHelper.CreateBotMessage(message);
+            ChatStackPanel.Children.Add(botBorder);
+        }
 
-            // Rounded corners
-            border.CornerRadius = new CornerRadius(10);
-
-            // Inner spacing
-            border.Padding = new Thickness(10);
-
-            // Outer spacing
-            border.Margin = new Thickness(5);
-
-            // Creates text
-            TextBlock text = new TextBlock();
-
-            // Adds YOU label
-            text.Text = "YOU: " + message;
-
-            // Text color
-            text.Foreground = Brushes.White;
-
-            // Text size
-            text.FontSize = 16;
-
-            // Wrap long text
-            text.TextWrapping = TextWrapping.Wrap;
-
-            // Places text inside border
-            border.Child = text;
-
-            // Adds message to panel
-            ChatPanel.Children.Add(border);
+        // Scrolls chat viewer to bottom
+        private void ScrollToBottom()
+        {
+            ChatScrollViewer.ScrollToBottom();
         }
     }
 }
