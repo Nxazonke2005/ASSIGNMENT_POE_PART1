@@ -13,11 +13,13 @@ namespace CyberSecurityAwarenessBot
         {
             Database.EnsureCreated();
         }
+        // To get the database file path, you can use the following code:
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=cybersecuritybot.db");
         }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
