@@ -10,6 +10,7 @@ namespace CyberSecurityAwarenessBot
         public int CorrectAnswerIndex { get; set; }
         public string Explanation { get; set; } = string.Empty;
     }
+    // QuizManager class to manage the quiz flow, questions, and scoring
 
     public class QuizManager
     {
@@ -147,6 +148,7 @@ namespace CyberSecurityAwarenessBot
 
             return questionText;
         }
+        // Method to answer the current question and provide feedback
 
         public bool AnswerQuestion(string answer)
         {
@@ -176,6 +178,7 @@ namespace CyberSecurityAwarenessBot
                     }
                 }
             }
+            // If the answer is not valid, return false
 
             bool correct = (selectedIndex == q.CorrectAnswerIndex);
             lastFeedback = q.Explanation;
@@ -191,11 +194,13 @@ namespace CyberSecurityAwarenessBot
         {
             return lastFeedback;
         }
+        // Method to check if the quiz is complete
 
         public bool IsQuizComplete()
         {
             return currentIndex >= questions.Count || quizComplete;
         }
+        // Method to get final feedback based on the score
 
         public string GetFinalFeedback()
         {
