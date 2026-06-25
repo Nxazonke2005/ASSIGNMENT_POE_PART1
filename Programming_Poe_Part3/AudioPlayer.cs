@@ -24,6 +24,7 @@ namespace CyberSecurityAwarenessBot
                 isAudioEnabled = false;
             }
         }
+        // Singleton instance property
 
         public static AudioPlayer Instance
         {
@@ -36,7 +37,7 @@ namespace CyberSecurityAwarenessBot
                 return instance;
             }
         }
-
+        // Property to enable or disable audio
         public bool IsAudioEnabled
         {
             get { return isAudioEnabled; }
@@ -51,6 +52,7 @@ namespace CyberSecurityAwarenessBot
                 volume = Math.Max(0, Math.Min(100, value));
             }
         }
+        // Method to play a WAV file
 
         // Play WAV file
         public void PlayWav(string filePath)
@@ -71,6 +73,7 @@ namespace CyberSecurityAwarenessBot
                 Console.WriteLine("Error playing WAV: " + ex.Message);
             }
         }
+        // Method to play a WAV file in a loop
 
         public void PlayWavLoop(string filePath)
         {
@@ -90,6 +93,7 @@ namespace CyberSecurityAwarenessBot
                 Console.WriteLine("Error playing WAV loop: " + ex.Message);
             }
         }
+        // Method to stop playing the WAV file
 
         public void StopWav()
         {
@@ -105,7 +109,7 @@ namespace CyberSecurityAwarenessBot
                 Console.WriteLine("Error stopping WAV: " + ex.Message);
             }
         }
-
+        // Method to play greeting sound
         public void PlayGreeting()
         {
             if (!isAudioEnabled)
