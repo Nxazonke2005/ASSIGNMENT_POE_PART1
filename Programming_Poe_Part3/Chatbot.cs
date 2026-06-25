@@ -18,6 +18,7 @@ namespace CyberSecurityAwarenessBot
             ["malware"] = new List<string> { "malware", "virus", "trojan", "worm", "ransomware" },
             ["browsing"] = new List<string> { "browsing", "internet safety", "online safety", "privacy" }
         };
+        // The topicResponses dictionary contains predefined responses for each cybersecurity topic. Each topic has a list of responses that the chatbot can randomly select from when the user asks about that topic.
 
         private Dictionary<string, List<string>> topicResponses = new Dictionary<string, List<string>>
         {
@@ -50,7 +51,7 @@ namespace CyberSecurityAwarenessBot
                 "Use ad-blockers like uBlock Origin to prevent malicious ads."
             }
         };
-
+        // The ProcessInput method takes the user's input, detects the intent, and returns an appropriate response based on the detected intent or topic.
         public string ProcessInput(string input)
         {
             input = input.ToLower().Trim();
