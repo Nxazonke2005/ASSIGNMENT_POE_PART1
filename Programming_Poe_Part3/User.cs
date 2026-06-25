@@ -14,7 +14,7 @@
             Email = "";
             Age = 0;
         }
-
+        // Constructor to initialize user with a name
         public User(string name)
         {
             Name = name;
@@ -22,6 +22,7 @@
             Email = "";
             Age = 0;
         }
+        // Method to get a greeting message based on the user's name
 
         public string GetGreeting()
         {
@@ -37,6 +38,7 @@
             Age = age;
             Email = email;
         }
+        // Method to get user information as a formatted string
 
         public string GetUserInfo()
         {
