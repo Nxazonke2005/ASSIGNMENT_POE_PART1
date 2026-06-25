@@ -23,6 +23,7 @@ namespace CyberSecurityAwarenessBot
                 return instance;
             }
         }
+        // Updated the LogAction method to include a timestamp and limit the log size
 
         public void LogAction(string action)
         {
