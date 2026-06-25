@@ -604,6 +604,7 @@ namespace CyberSecurityAwarenessBot
             ChatStackPanel.Children.Add(botBorder);
             ScrollToBottom();
         }
+        // Scroll to bottom of chat
 
         private void ScrollToBottom()
         {
